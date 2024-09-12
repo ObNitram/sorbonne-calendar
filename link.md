@@ -40,3 +40,11 @@ https://obnitram.github.io/sorbonne-calendar/m1/res/ares/m1-res-ares-group3.ics
 https://obnitram.github.io/sorbonne-calendar/m1/res/ares/m1-res-ares-group4.ics
 
 
+## Calendrier des cours de M1 SFPN
+
+### SC
+https://obnitram.github.io/sorbonne-calendar/m1/sfpn/sc/m1-sfpn-sc-group1.ics
+
+https://obnitram.github.io/sorbonne-calendar/m1/sfpn/sc/m1-sfpn-sc-group2.ics
+
+
