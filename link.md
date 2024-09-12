@@ -30,3 +30,13 @@ https://obnitram.github.io/sorbonne-calendar/m1/stl/algav/m1-stl-algav-group1.ic
 https://obnitram.github.io/sorbonne-calendar/m1/stl/algav/m1-stl-algav-group2.ics
 
 
+## Calendrier des cours de M1 RES
+
+### ARES
+https://obnitram.github.io/sorbonne-calendar/m1/res/ares/m1-res-ares-group1.ics
+
+https://obnitram.github.io/sorbonne-calendar/m1/res/ares/m1-res-ares-group3.ics
+
+https://obnitram.github.io/sorbonne-calendar/m1/res/ares/m1-res-ares-group4.ics
+
+
