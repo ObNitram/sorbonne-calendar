@@ -78,7 +78,6 @@ def save_calendars(calendars: Dict[str, Calendar], path: str = "") -> list[str]:
         with open(filename, 'w') as f:
             ics_content = cal.serialize()  # Correctly handle ics serialization
             f.write(ics_content)
-            print(f"Calendar '{name}' saved to file '{filename}'.")
             paths.append(os.path.join(path, f"{name}.ics"))
 
     return paths
@@ -114,7 +113,7 @@ def merge_calendars(calendars: List[Calendar]) -> Calendar:
 
 def write_links_to_file(paths: List[str], link_file: str, host: str, title: str) -> None:
     """Write the links to the file."""
-    with open(link_file, 'w') as f:
+    with open(link_file, 'a') as f:
         f.write(f"## {title}\n")
         for path in paths:
             f.write(f"{host}{path}\n")
