@@ -2,13 +2,13 @@ from datetime import datetime, timezone
 from ics import Calendar
 from typing import Dict
 
-
 from core.lib import (
     write_links_to_file,
     load_calendar_from_file,
     filter_events_by_name,
     save_calendars,
     filter_events_by_date_range,
+    load_calendar_from_url
 )
 
 from core.lib_noyau import get_noyau_calendars
@@ -22,15 +22,15 @@ username = 'student.master'
 password = 'guest'
 
 # Base URL
-host = 'https://obnitram.github.io/sorbonne_calendar/'
+host = 'https://obnitram.github.io/sorbonne-calendar/'
 link_file = 'link.md'
 
 
 # Main logic
 def main() -> None:
     # Load the calendar from a file or a URL
-    raw_calendar = load_calendar_from_file('data/evenement.ics')
-    # raw_calendar = load_calendar_from_url(url, username, password)
+    # raw_calendar = load_calendar_from_file('data/evenement.ics')
+    raw_calendar = load_calendar_from_url(url, username, password)
 
     # Filter events by date range
     start_date = datetime(2024, 9, 1, tzinfo=timezone.utc)
