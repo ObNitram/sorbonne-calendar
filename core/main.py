@@ -43,7 +43,7 @@ def main() -> None:
     filtered_calendars: Dict[str, Calendar] = filter_events_by_name(raw_calendar, filters)
 
 
-    save_calendars(get_noyau_calendars(filtered_calendars["NOYAU"]), "noyau")
+    save_calendars(get_noyau_calendars(filtered_calendars["NOYAU"]), "m1/sar/noyau")
 
 
 if __name__ == '__main__':

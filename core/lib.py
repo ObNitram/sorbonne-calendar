@@ -71,7 +71,7 @@ def save_calendars(calendars: Dict[str, Calendar], path: str = "") -> None:
 
     # Iterate over the filtered calendars and save each one
     for name, cal in calendars.items():
-        filename = os.path.join(full_path, f"calendar_{name}.ics")
+        filename = os.path.join(full_path, f"{name}.ics")
         with open(filename, 'w') as f:
             ics_content = cal.serialize()  # Correctly handle ics serialization
             f.write(ics_content)

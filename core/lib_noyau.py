@@ -16,19 +16,19 @@ def get_noyau_calendars(raw_calendar: Calendar) -> Dict[str, Calendar]:
     noyau_filters = ["cours", "TD1", "TD2", "TD3"]
     noyau_filtered_calendars = filter_events_by_name(raw_calendar, noyau_filters)
 
-    noyau_td1 = merge_calendars([
+    td1 = merge_calendars([
         noyau_filtered_calendars["cours"],
         noyau_filtered_calendars["TD1"],
         noyau_filtered_calendars["default"]
     ])
 
-    noyau_td2 = merge_calendars([
+    td2 = merge_calendars([
         noyau_filtered_calendars["cours"],
         noyau_filtered_calendars["TD2"],
         noyau_filtered_calendars["default"]
     ])
 
-    noyau_td3 = merge_calendars([
+    td3 = merge_calendars([
         noyau_filtered_calendars["cours"],
         noyau_filtered_calendars["TD3"],
         noyau_filtered_calendars["default"]
@@ -36,7 +36,7 @@ def get_noyau_calendars(raw_calendar: Calendar) -> Dict[str, Calendar]:
 
     # Save each filtered calendar to a separate ICS file
     return {
-        "noyau_td1": noyau_td1,
-        "noyau_td2": noyau_td2,
-        "noyau_td3": noyau_td3,
+        "td1": td1,
+        "td2": td2,
+        "td3": td3,
     }
