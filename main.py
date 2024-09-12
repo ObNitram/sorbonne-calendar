@@ -12,6 +12,7 @@ from core.lib import (
     write_string_to_file
 )
 from core.lib_algav import get_algav_calendars
+from core.lib_ares import get_ares_calendars
 from core.lib_dlp import get_dlp_calendars
 from core.lib_noyau import get_noyau_calendars
 from core.lib_pscr import get_pscr_calendars
@@ -66,6 +67,17 @@ def main() -> None:
 
     paths = save_calendars(get_algav_calendars(filtered_calendars["ALGAV"]), "m1/stl/algav")
     write_links_to_file(paths, link_file, host, "ALGAV")
+
+
+    #M1 RES
+    write_string_to_file(f"## Calendrier des cours de M1 RES\n\n", link_file)
+
+    calendar = get_filtered_calendars_from_url('https://cal.ufr-info-p6.jussieu.fr/caldav.php/RES/M1_RES')
+    filters = ["ARES"]
+    filtered_calendars: Dict[str, Calendar] = filter_events_by_name(calendar, filters)
+
+    paths = save_calendars(get_ares_calendars(filtered_calendars["ARES"]), "m1/res/ares")
+    write_links_to_file(paths, link_file, host, "ARES")
 
 
     shutil.copy(link_file, 'public/' + link_file)
