@@ -43,10 +43,10 @@ def main() -> None:
     filters = ["NOYAU", "PSCR"]
     filtered_calendars: Dict[str, Calendar] = filter_events_by_name(raw_calendar, filters)
 
-    paths = save_calendars(get_noyau_calendars(filtered_calendars["NOYAU"]), "docs/m1/sar/noyau")
+    paths = save_calendars(get_noyau_calendars(filtered_calendars["NOYAU"]), "m1/sar/noyau")
     write_links_to_file(paths, link_file, host, "NOYAU")
 
-    paths = save_calendars(get_pscr_calendars(filtered_calendars["PSCR"]), "docs/m1/sar/pscr")
+    paths = save_calendars(get_pscr_calendars(filtered_calendars["PSCR"]), "m1/sar/pscr")
     write_links_to_file(paths, link_file, host, "PSCR")
 
 
