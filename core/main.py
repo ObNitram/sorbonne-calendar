@@ -2,19 +2,16 @@ from datetime import datetime, timezone
 from ics import Calendar
 from typing import Dict
 
-
+from core.lib import write_links_to_file
 from lib import (
     load_calendar_from_file,
-    load_calendar_from_url,
-    display_events,
     filter_events_by_name,
     save_calendars,
     filter_events_by_date_range,
-    merge_calendars
 )
 
 from lib_noyau import get_noyau_calendars
-
+from lib_pscr import get_pscr_calendars
 
 # URL of the CalDAV resource
 url = 'https://cal.ufr-info-p6.jussieu.fr/caldav.php/SAR/M1_SAR'
@@ -23,11 +20,15 @@ url = 'https://cal.ufr-info-p6.jussieu.fr/caldav.php/SAR/M1_SAR'
 username = 'student.master'
 password = 'guest'
 
+# Base URL
+host = 'https://obnitram.github.io/sorbonne_calendar/'
+link_file = 'link.md'
+
 
 # Main logic
 def main() -> None:
     # Load the calendar from a file or a URL
-    raw_calendar = load_calendar_from_file('evenement.ics')
+    raw_calendar = load_calendar_from_file('data/evenement.ics')
     # raw_calendar = load_calendar_from_url(url, username, password)
 
     # Filter events by date range
@@ -36,14 +37,17 @@ def main() -> None:
     raw_calendar = filter_events_by_date_range(raw_calendar, start_date, end_date)
 
     # Display the events in the calendar
-    #display_events(raw_calendar)
+    # display_events(raw_calendar)
 
     # Define filters to create separate calendars
     filters = ["NOYAU", "PSCR"]
     filtered_calendars: Dict[str, Calendar] = filter_events_by_name(raw_calendar, filters)
 
+    paths = save_calendars(get_noyau_calendars(filtered_calendars["NOYAU"]), "docs/m1/sar/noyau")
+    write_links_to_file(paths, link_file, host, "NOYAU")
 
-    save_calendars(get_noyau_calendars(filtered_calendars["NOYAU"]), "m1/sar/noyau")
+    paths = save_calendars(get_pscr_calendars(filtered_calendars["PSCR"]), "docs/m1/sar/pscr")
+    write_links_to_file(paths, link_file, host, "PSCR")
 
 
 if __name__ == '__main__':

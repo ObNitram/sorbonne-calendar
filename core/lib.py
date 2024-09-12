@@ -62,12 +62,15 @@ def filter_events_by_name(calendar: Calendar, filters: List[str]) -> Dict[str, C
     return filtered_calendars
 
 
-def save_calendars(calendars: Dict[str, Calendar], path: str = "") -> None:
+def save_calendars(calendars: Dict[str, Calendar], path: str = "") -> list[str]:
     """Save the filtered calendars to separate ICS files, creating directories if needed."""
 
     # Create the directory if it doesn't exist
-    full_path = os.path.join("../docs", path)
+    full_path = path
     os.makedirs(full_path, exist_ok=True)
+
+    # paths
+    paths:list[str] = []
 
     # Iterate over the filtered calendars and save each one
     for name, cal in calendars.items():
@@ -76,6 +79,10 @@ def save_calendars(calendars: Dict[str, Calendar], path: str = "") -> None:
             ics_content = cal.serialize()  # Correctly handle ics serialization
             f.write(ics_content)
             print(f"Calendar '{name}' saved to file '{filename}'.")
+            paths.append(os.path.join(path, f"{name}.ics"))
+
+    return paths
+
 
 
 def filter_events_by_date_range(calendar: Calendar, start_date: datetime, end_date: datetime) -> Calendar:
@@ -103,3 +110,12 @@ def merge_calendars(calendars: List[Calendar]) -> Calendar:
             merged_calendar.events.add(event)
 
     return merged_calendar
+
+
+def write_links_to_file(paths: List[str], link_file: str, host: str, title: str) -> None:
+    """Write the links to the file."""
+    with open(link_file, 'w') as f:
+        f.write(f"## {title}\n")
+        for path in paths:
+            f.write(f"{host}{path}\n")
+        f.write(f"\n")
