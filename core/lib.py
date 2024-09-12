@@ -117,5 +117,5 @@ def write_links_to_file(paths: List[str], link_file: str, host: str, title: str)
     with open(link_file, 'a') as f:
         f.write(f"## {title}\n")
         for path in paths:
-            f.write(f"{host}{path}\n")
+            f.write(f"{host}{path}\n\n")
         f.write(f"\n")
