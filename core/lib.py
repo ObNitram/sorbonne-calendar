@@ -115,7 +115,13 @@ def merge_calendars(calendars: List[Calendar]) -> Calendar:
 def write_links_to_file(paths: List[str], link_file: str, host: str, title: str) -> None:
     """Write the links to the file."""
     with open(link_file, 'a') as f:
-        f.write(f"## {title}\n")
+        f.write(f"### {title}\n")
         for path in paths:
             f.write(f"{host}{path}\n\n")
         f.write(f"\n")
+
+
+def write_string_to_file(content: str, file: str) -> None:
+    """Write the content to the file."""
+    with open(file, 'a') as f:
+        f.write(content)

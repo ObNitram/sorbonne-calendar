@@ -9,7 +9,8 @@ from core.lib import (
     filter_events_by_name,
     save_calendars,
     filter_events_by_date_range,
-    load_calendar_from_url
+    load_calendar_from_url,
+    write_string_to_file
 )
 
 from core.lib_noyau import get_noyau_calendars
@@ -40,6 +41,8 @@ def main() -> None:
 
     with open(link_file, 'w'):
         pass
+
+    write_string_to_file(f"## Calendrier des cours de M1 SAR\n\n", link_file)
 
     filters = ["NOYAU", "PSCR"]
     filtered_calendars: Dict[str, Calendar] = filter_events_by_name(raw_calendar, filters)

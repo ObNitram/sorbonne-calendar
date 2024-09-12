@@ -1,4 +1,6 @@
-## NOYAU
+## Calendrier des cours de M1 SAR
+
+### NOYAU
 https://obnitram.github.io/sorbonne-calendar/m1/sar/noyau/m1-sar-noyau-group1.ics
 
 https://obnitram.github.io/sorbonne-calendar/m1/sar/noyau/m1-sar-noyau-group2.ics
@@ -6,7 +8,7 @@ https://obnitram.github.io/sorbonne-calendar/m1/sar/noyau/m1-sar-noyau-group2.ic
 https://obnitram.github.io/sorbonne-calendar/m1/sar/noyau/m1-sar-noyau-group3.ics
 
 
-## PSCR
+### PSCR
 https://obnitram.github.io/sorbonne-calendar/m1/sar/pscr/m1-sar-pscr-group1.ics
 
 https://obnitram.github.io/sorbonne-calendar/m1/sar/pscr/m1-sar-pscr-group2.ics
