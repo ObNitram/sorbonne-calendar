@@ -36,10 +36,9 @@ def main() -> None:
     end_date = datetime(2024, 12, 31, tzinfo=timezone.utc)
     raw_calendar = filter_events_by_date_range(raw_calendar, start_date, end_date)
 
-    # Display the events in the calendar
-    # display_events(raw_calendar)
+    with open(link_file, 'w') as file:
+        pass
 
-    # Define filters to create separate calendars
     filters = ["NOYAU", "PSCR"]
     filtered_calendars: Dict[str, Calendar] = filter_events_by_name(raw_calendar, filters)
 
@@ -48,6 +47,9 @@ def main() -> None:
 
     paths = save_calendars(get_pscr_calendars(filtered_calendars["PSCR"]), "m1/sar/pscr")
     write_links_to_file(paths, link_file, host, "PSCR")
+
+
+
 
 
 if __name__ == '__main__':
