@@ -51,7 +51,7 @@ def main() -> None:
     write_links_to_file(paths, link_file, host, "PSCR")
 
 
-    shutil.copy(link_file, 'docs/' + link_file)
+    shutil.copy(link_file, 'public/' + link_file)
 
 
 if __name__ == '__main__':

@@ -66,7 +66,7 @@ def save_calendars(calendars: Dict[str, Calendar], path: str = "") -> list[str]:
     """Save the filtered calendars to separate ICS files, creating directories if needed."""
 
     # Create the directory if it doesn't exist
-    full_path = os.path.join("docs", path)
+    full_path = os.path.join("public", path)
     os.makedirs(full_path, exist_ok=True)
 
     # paths
