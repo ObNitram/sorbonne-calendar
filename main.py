@@ -1,3 +1,4 @@
+import shutil
 from datetime import datetime, timezone
 from ics import Calendar
 from typing import Dict
@@ -48,6 +49,9 @@ def main() -> None:
 
     paths = save_calendars(get_pscr_calendars(filtered_calendars["PSCR"]), "m1/sar/pscr")
     write_links_to_file(paths, link_file, host, "PSCR")
+
+
+    shutil.copy(link_file, 'docs/' + link_file)
 
 
 if __name__ == '__main__':
