@@ -1,7 +1,7 @@
 from ics import Calendar
 from typing import Dict
 
-from lib import (
+from core.lib import (
     filter_events_by_name,
     merge_calendars
 )

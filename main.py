@@ -2,16 +2,17 @@ from datetime import datetime, timezone
 from ics import Calendar
 from typing import Dict
 
-from core.lib import write_links_to_file
-from lib import (
+
+from core.lib import (
+    write_links_to_file,
     load_calendar_from_file,
     filter_events_by_name,
     save_calendars,
     filter_events_by_date_range,
 )
 
-from lib_noyau import get_noyau_calendars
-from lib_pscr import get_pscr_calendars
+from core.lib_noyau import get_noyau_calendars
+from core.lib_pscr import get_pscr_calendars
 
 # URL of the CalDAV resource
 url = 'https://cal.ufr-info-p6.jussieu.fr/caldav.php/SAR/M1_SAR'
