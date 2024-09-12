@@ -36,7 +36,7 @@ def main() -> None:
     end_date = datetime(2024, 12, 31, tzinfo=timezone.utc)
     raw_calendar = filter_events_by_date_range(raw_calendar, start_date, end_date)
 
-    with open(link_file, 'w') as file:
+    with open(link_file, 'w'):
         pass
 
     filters = ["NOYAU", "PSCR"]
