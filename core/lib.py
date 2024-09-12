@@ -1,9 +1,10 @@
 import os
 import requests
-from requests.auth import HTTPBasicAuth
 from datetime import datetime
 from ics import Calendar
 from typing import Dict, List
+
+from requests.auth import HTTPBasicAuth
 
 
 def load_calendar_from_file(filename: str) -> Calendar:
@@ -17,9 +18,9 @@ def load_calendar_from_file(filename: str) -> Calendar:
         exit(1)
 
 
-def load_calendar_from_url(url: str, username: str, password: str) -> Calendar:
+def load_calendar_from_url(url: str, auth: HTTPBasicAuth) -> Calendar:
     """Load the calendar from a CalDAV URL."""
-    response = requests.get(url, auth=HTTPBasicAuth(username, password))
+    response = requests.get(url, auth=auth)
     if response.status_code != 200:
         print(f"Error accessing URL: {response.status_code}")
         exit(1)
@@ -70,11 +71,11 @@ def save_calendars(calendars: Dict[str, Calendar], path: str = "") -> list[str]:
     os.makedirs(full_path, exist_ok=True)
 
     # paths
-    paths:list[str] = []
+    paths: list[str] = []
 
     # Iterate over the filtered calendars and save each one
     for name, cal in calendars.items():
-        filename = f"{path.replace('/','-')}-{name}.ics"
+        filename = f"{path.replace('/', '-')}-{name}.ics"
         filename_and_path = os.path.join(full_path, filename)
         with open(filename_and_path, 'w') as f:
             ics_content = cal.serialize()  # Correctly handle ics serialization
@@ -82,7 +83,6 @@ def save_calendars(calendars: Dict[str, Calendar], path: str = "") -> list[str]:
             paths.append(os.path.join(path, filename))
 
     return paths
-
 
 
 def filter_events_by_date_range(calendar: Calendar, start_date: datetime, end_date: datetime) -> Calendar:

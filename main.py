@@ -3,6 +3,8 @@ from datetime import datetime, timezone
 from ics import Calendar
 from typing import Dict
 
+from requests.auth import HTTPBasicAuth
+
 from core.lib import (
     write_links_to_file,
     filter_events_by_name,
@@ -16,10 +18,12 @@ from core.lib_ares import get_ares_calendars
 from core.lib_dlp import get_dlp_calendars
 from core.lib_noyau import get_noyau_calendars
 from core.lib_pscr import get_pscr_calendars
+from core.lib_sc import get_sc_calendars
 
 # Replace 'username' and 'password' with your correct credentials
 username = 'student.master'
 password = 'guest'
+auth = HTTPBasicAuth(username, password)
 
 # Base URL
 host = 'https://obnitram.github.io/sorbonne-calendar/'
@@ -30,8 +34,7 @@ end_date = datetime(2024, 12, 31, tzinfo=timezone.utc)
 
 
 def get_filtered_calendars_from_url(url: str) -> Calendar:
-    raw_calendar = load_calendar_from_url(url, username, password)
-
+    raw_calendar = load_calendar_from_url(url, auth)
     return filter_events_by_date_range(raw_calendar, start_date, end_date)
 
 
@@ -39,7 +42,6 @@ def get_filtered_calendars_from_url(url: str) -> Calendar:
 def main() -> None:
     with open(link_file, 'w'):
         pass
-
 
     # M1 SAR
     write_string_to_file(f"## Calendrier des cours de M1 SAR\n\n", link_file)
@@ -54,8 +56,7 @@ def main() -> None:
     paths = save_calendars(get_pscr_calendars(filtered_calendars["PSCR"]), "m1/sar/pscr")
     write_links_to_file(paths, link_file, host, "PSCR")
 
-
-    #M1 STL
+    # M1 STL
     write_string_to_file(f"## Calendrier des cours de M1 STL\n\n", link_file)
 
     calendar = get_filtered_calendars_from_url('https://cal.ufr-info-p6.jussieu.fr/caldav.php/STL/M1_STL')
@@ -68,8 +69,7 @@ def main() -> None:
     paths = save_calendars(get_algav_calendars(filtered_calendars["ALGAV"]), "m1/stl/algav")
     write_links_to_file(paths, link_file, host, "ALGAV")
 
-
-    #M1 RES
+    # M1 RES
     write_string_to_file(f"## Calendrier des cours de M1 RES\n\n", link_file)
 
     calendar = get_filtered_calendars_from_url('https://cal.ufr-info-p6.jussieu.fr/caldav.php/RES/M1_RES')
@@ -79,8 +79,18 @@ def main() -> None:
     paths = save_calendars(get_ares_calendars(filtered_calendars["ARES"]), "m1/res/ares")
     write_links_to_file(paths, link_file, host, "ARES")
 
+    # M1 SFPN
+    write_string_to_file(f"## Calendrier des cours de M1 SFPN\n\n", link_file)
+
+    calendar = get_filtered_calendars_from_url('https://cal.ufr-info-p6.jussieu.fr/caldav.php/SFPN/M1_SFPN')
+    filters = ["SC"]
+    filtered_calendars: Dict[str, Calendar] = filter_events_by_name(calendar, filters)
+
+    paths = save_calendars(get_sc_calendars(filtered_calendars["SC"]), "m1/sfpn/sc")
+    write_links_to_file(paths, link_file, host, "SC")
 
     shutil.copy(link_file, 'public/' + link_file)
+
 
 if __name__ == '__main__':
     main()
