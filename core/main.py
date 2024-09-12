@@ -49,8 +49,5 @@ def main() -> None:
     write_links_to_file(paths, link_file, host, "PSCR")
 
 
-
-
-
 if __name__ == '__main__':
     main()
