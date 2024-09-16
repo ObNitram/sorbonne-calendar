@@ -8,32 +8,30 @@ from core.lib import (
 
 
 def get_pscr_calendars(raw_calendar: Calendar) -> Dict[str, Calendar]:
-    noyau_filters = ["cours", "TD1", "TD2", "TD3", "TME1", "TME2", "TME3"]
-    noyau_filtered_calendars = filter_events_by_name(raw_calendar, noyau_filters)
-
+    course_type_filters = ["cours", "TD1", "TD2", "TD3", "TME1", "TME2", "TME3"]
+    filtered_calendars = filter_events_by_name(raw_calendar, course_type_filters)
 
     group1 = merge_calendars([
-        noyau_filtered_calendars["cours"],
-        noyau_filtered_calendars["TD1"],
-        noyau_filtered_calendars["TME1"],
-        noyau_filtered_calendars["default"]
+        filtered_calendars["cours"],
+        filtered_calendars["TD1"],
+        filtered_calendars["TME1"],
+        filtered_calendars["default"]
     ])
 
     group2 = merge_calendars([
-        noyau_filtered_calendars["cours"],
-        noyau_filtered_calendars["TD2"],
-        noyau_filtered_calendars["TME2"],
-        noyau_filtered_calendars["default"]
+        filtered_calendars["cours"],
+        filtered_calendars["TD2"],
+        filtered_calendars["TME2"],
+        filtered_calendars["default"]
     ])
 
     group3 = merge_calendars([
-        noyau_filtered_calendars["cours"],
-        noyau_filtered_calendars["TD3"],
-        noyau_filtered_calendars["TME3"],
-        noyau_filtered_calendars["default"]
+        filtered_calendars["cours"],
+        filtered_calendars["TD3"],
+        filtered_calendars["TME3"],
+        filtered_calendars["default"]
     ])
 
-    # Save each filtered calendar to a separate ICS file
     return {
         "group1": group1,
         "group2": group2,

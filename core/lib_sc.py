@@ -8,8 +8,8 @@ from core.lib import (
 
 
 def get_sc_calendars(raw_calendar: Calendar) -> Dict[str, Calendar]:
-    class_type_filters = ["Cours", "TME 1", "TME 2"]
-    filtered_calendars = filter_events_by_name(raw_calendar, class_type_filters)
+    course_type_filters = ["Cours", "TME 1", "TME 2"]
+    filtered_calendars = filter_events_by_name(raw_calendar, course_type_filters)
 
     group1 = merge_calendars([
         filtered_calendars["Cours"],
