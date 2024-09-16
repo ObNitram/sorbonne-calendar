@@ -8,7 +8,7 @@ from core.lib import (
 
 
 def get_archi_calendars(raw_calendar: Calendar) -> Dict[str, Calendar]:
-    course_type_filters = ["cours", "TD1", "TD2"]
+    course_type_filters = ["anglais", "cours", "TD1", "TD2"]
     filtered_calendars = filter_events_by_name(raw_calendar, course_type_filters)
 
     group1 = merge_calendars([
@@ -23,7 +23,10 @@ def get_archi_calendars(raw_calendar: Calendar) -> Dict[str, Calendar]:
         filtered_calendars["default"]
     ])
 
+    group3_anglais = filtered_calendars["anglais"]
+
     return {
         "group1": group1,
         "group2": group2,
+        "group3-anglais": group3_anglais
     }
