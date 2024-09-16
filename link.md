@@ -48,3 +48,15 @@ https://obnitram.github.io/sorbonne-calendar/m1/sfpn/sc/m1-sfpn-sc-group1.ics
 https://obnitram.github.io/sorbonne-calendar/m1/sfpn/sc/m1-sfpn-sc-group2.ics
 
 
+## Calendrier des cours de M1 SESI
+
+### ARCHI
+https://obnitram.github.io/sorbonne-calendar/m1/sesi/archi/m1-sesi-archi-group1.ics
+
+https://obnitram.github.io/sorbonne-calendar/m1/sesi/archi/m1-sesi-archi-group2.ics
+
+
+### VLSI
+https://obnitram.github.io/sorbonne-calendar/m1/sesi/vlsi/m1-sesi-vlsi-group1.ics
+
+
