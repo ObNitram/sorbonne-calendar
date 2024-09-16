@@ -13,10 +13,9 @@ Un script Python non officiel qui génère des liens vers les calendriers des di
    - Cliquez sur le signe **+** à côté de "Autres agendas", puis sélectionnez **Ajouter via URL**.
    - Collez l'URL correspondant à votre matière.
 
-## ⚠️ Points Importants
+## ⚠️ Point Important
 
-- Les calendriers sont automatiquement mis à jour quotidiennement. Les modifications peuvent prendre jusqu'à 24 heures pour être reflétées dans votre application de calendrier.
-- Ce projet est **non officiel** et n'est **pas soutenu** par Sorbonne Université ni par aucun professeur. Utilisez-le sans vous plaindre.
+Les calendriers sont automatiquement mis à jour toutes les 4 heures. Cependant, les modifications peuvent prendre plus de temps avant d’être reflétées dans votre application de calendrier.
 
 ## 🤝 Contributions
 
