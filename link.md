@@ -44,6 +44,9 @@ https://obnitram.github.io/sorbonne-calendar/m1/sesi/archi/m1-sesi-archi-group1.
 ### group2
 https://obnitram.github.io/sorbonne-calendar/m1/sesi/archi/m1-sesi-archi-group2.ics
 
+### group3-anglais
+https://obnitram.github.io/sorbonne-calendar/m1/sesi/archi/m1-sesi-archi-group3-anglais.ics
+
 
 ## VLSI
 ### group1
