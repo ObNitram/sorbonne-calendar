@@ -23,7 +23,10 @@ def get_archi_calendars(raw_calendar: Calendar) -> Dict[str, Calendar]:
         filtered_calendars["default"]
     ])
 
-    group3_anglais = filtered_calendars["anglais"]
+    group3_anglais = merge_calendars([
+        filtered_calendars["anglais"],
+        filtered_calendars["default"]
+    ])
 
     return {
         "group1": group1,
