@@ -21,6 +21,7 @@ from core.lib_noyau import get_noyau_calendars
 from core.lib_pscr import get_pscr_calendars
 from core.lib_sc import get_sc_calendars
 from core.lib_vlsi import get_vlsi_calendars
+from core.lib_mlbda import get_mlbda_calendars
 
 # Replace 'username' and 'password' with your correct credentials
 username = 'student.master'
@@ -103,6 +104,16 @@ def main() -> None:
 
     paths = save_calendars(get_dlp_calendars(filtered_calendars["DLP"]), "m1/stl/dlp")
     write_links_to_file(paths, link_file, host, "DLP")
+
+    # M1 DAC
+    write_string_to_file(f"## Calendrier des cours de M1 DAC\n\n", link_file)
+
+    calendar = get_filtered_calendars_from_url('https://cal.ufr-info-p6.jussieu.fr/caldav.php/DAC/M1_DAC')
+    filters = ["MLBDA"]
+    filtered_calendars: Dict[str, Calendar] = filter_events_by_name(calendar, filters)
+
+    paths = save_calendars(get_mlbda_calendars(filtered_calendars["MLBDA"]), "m1/dac/mlbda")
+    write_links_to_file(paths, link_file, host, "MLBDA")
 
     shutil.copy(link_file, 'public/' + link_file)
 
