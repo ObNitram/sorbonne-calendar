@@ -85,7 +85,7 @@ def main() -> None:
     # M1 SFPN
     write_string_to_file(f"## Calendrier des cours de M1 SFPN\n\n", link_file)
 
-    calendar = get_filtered_calendars_from_url('https://cal.ufr-info-p6.jussieu.fr/caldav.php/SFPN/M1_SFPN')
+    calendar = get_filtered_calendars_from_url('https://cal.ufr-info-p6.jussieu.fr/caldav.php/SFPN/M1_SFPN-AFTI')
     filters = ["SC"]
     filtered_calendars: Dict[str, Calendar] = filter_events_by_name(calendar, filters)
 
