@@ -33,7 +33,7 @@ host = 'https://obnitram.github.io/sorbonne-calendar/'
 link_file = 'link.md'
 
 start_date = datetime(2024, 9, 1, tzinfo=timezone.utc)
-end_date = datetime(2024, 12, 31, tzinfo=timezone.utc)
+end_date = datetime(2025, 1, 31, tzinfo=timezone.utc)
 
 
 def get_filtered_calendars_from_url(url: str) -> Calendar:
