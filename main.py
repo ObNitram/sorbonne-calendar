@@ -27,7 +27,7 @@ from core.lib_ar import get_ar_calendars
 from core.lib_srcs import get_srcs_calendars
 from core.lib_sftr import get_sftr_calendars
 from core.lib_sas import get_sas_calendars
-from core.lib_anglais_sar import get_anglais_sar_calendars
+# from core.lib_anglais_sar import get_anglais_sar_calendars
 
 # Replace 'username' and 'password' with your correct credentials
 username = 'student.master'
