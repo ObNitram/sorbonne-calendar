@@ -1,45 +1,55 @@
-name: Build and Deploy to GitHub Pages
+name: CI Build and Deploy
 
 on:
+  pull_request:
+    branches: 
+      - main
   push:
     branches:
-      - main  # Runs on every push to the main branch
+      - main
   schedule:
-  - cron: "*/30 7-18 * * 1-5"
-  - cron: "0 */4 * * 6,0"
-  - cron: "0 19-23 * * 1-5"
+    - cron: "*/30 7-18 * * 1-5"
+    - cron: "0 */4 * * 6,0"
+    - cron: "0 19-23 * * 1-5"
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the repository code
+      # Étape 1 : Récupérer le code du dépôt
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      # Step 2: Set up Python environment
+      # Étape 2 : Configurer l'environnement Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'  # Specify your Python version
+          python-version: '3.x'
 
-      # Step 3: Install dependencies
+      # Étape 3 : Installer les dépendances
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install ics
-          pip install requests
+          pip install ics requests
 
-      # Step 4: Run your Python script
+      # Étape 4 : Exécuter votre script Python
       - name: Run Python script
         run: |
-          python main.py  # Make sure to provide the correct path to your Python script
+          python main.py 
 
-      # Step 5: Generate the GitHub Pages content 
+      # Étape 5A : Si c'est une Pull Request, publier l'artefact
+      - name: Upload Artifact for PR
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifact
+          path: ./public 
+
+      # Étape 5B : Si c'est un push ou un cron, déployer sur GitHub Pages
       - name: Deploy to GitHub Pages
+        if: github.event_name == 'push' || github.event_name == 'schedule'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public  # Replace with the directory containing the generated files
-          
+          publish_dir: ./public
