@@ -37,8 +37,8 @@ auth = HTTPBasicAuth(username, password)
 
 # Base URL
 host = 'https://obnitram.github.io/sorbonne-calendar/'
-link_file = 'link.md'
-json_file = 'calendars.json'
+link_file = 'public/link.md'
+json_file = 'public/calendars.json'
 
 start_date = datetime(2024, 9, 1, tzinfo=timezone.utc)
 end_date = datetime(2025, 6, 30, tzinfo=timezone.utc)
@@ -299,8 +299,6 @@ def main() -> None:
     with open(json_file, 'w') as f:
         json.dump(json_data, f)
 
-    shutil.copy(link_file, 'public/' + link_file)
-    shutil.copy(json_file, 'public/' + json_file)
     shutil.copy("index.html", 'public/index.html')
 
 
