@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Calendriers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        header {
+            background-color: #0078d7;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        .accordion {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            background-color: #fff;
+        }
+
+        .accordion-header {
+            background-color: #0078d7;
+            color: #fff;
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion-header:hover {
+            background-color: #005bb5;
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 1rem;
+            border-top: 1px solid #ddd;
+        }
+
+        .calendar-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar-card h2 {
+            margin-top: 0;
+        }
+
+        .calendar-card p {
+            margin: 0.5rem 0;
+        }
+
+        .calendar-card .buttons {
+            margin-top: 1rem;
+        }
+
+        .calendar-card button {
+            background-color: #0078d7;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 0.5rem;
+            transition: background-color 0.3s;
+        }
+
+        .calendar-card button:hover {
+            background-color: #005bb5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #333;
+            color: #fff;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Calendriers des master de Sorbonne université</h1>
+    </header>
+
+    <main id="calendar-container">
+        <!-- Les sections d'accordéon seront générées ici -->
+        <template id="accordion-template">
+            <div class="accordion">
+                <div class="accordion-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'block' ? 'none' : 'block';"></div>
+                <div class="accordion-content"></div>
+            </div>
+        </template>
+
+        <template id="calendar-template">
+            <section class="calendar-card">
+                <h2></h2>
+                <p></p>
+                <div class="buttons">
+                    <button class="open-btn">Ouvrir</button>
+                    <button class="copy-btn">Copier le lien</button>
+                </div>
+            </section>
+        </template>
+    </main>
+
+    <footer>
+    </footer>
+
+    <script>
+
+        if (!(navigator.clipboard && navigator.clipboard.writeText)) {
+            alert('Votre navigateur ne supporte pas la copie dans le presse-papiers.');
+        }
+
+        fetch('calendars.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur lors du chargement du fichier JSON');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const container = document.getElementById('calendar-container');
+                const accordionTemplate = document.getElementById('accordion-template');
+                const calendarTemplate = document.getElementById('calendar-template');
+
+                data.forEach(master => {
+                    const masterClone = accordionTemplate.content.cloneNode(true);
+                    const masterHeader = masterClone.querySelector('.accordion-header');
+                    const masterContent = masterClone.querySelector('.accordion-content');
+
+                    masterHeader.textContent = `Master ${master.master}`;
+                    master.ues.forEach(ue => {
+                        const ueClone = accordionTemplate.content.cloneNode(true);
+                        const ueHeader = ueClone.querySelector('.accordion-header');
+                        const ueContent = ueClone.querySelector('.accordion-content');
+
+                        ueHeader.textContent = ue.name;
+                        
+                        ue.groups.forEach(group => {
+                            const groupClone = calendarTemplate.content.cloneNode(true);
+                            groupClone.querySelector('h2').textContent = group.group;
+                            groupClone.querySelector('p').textContent = `URL: ${group.url}`;
+
+                            const openButton = groupClone.querySelector('.open-btn');
+                            openButton.onclick = () => window.open(group.url, '_blank');
+
+                            const copyButton = groupClone.querySelector('.copy-btn');
+                            copyButton.onclick = () => navigator.clipboard.writeText(group.url);
+
+                            ueContent.appendChild(groupClone);
+                        });
+
+                        masterContent.appendChild(ueClone);
+                    });
+
+                    container.appendChild(masterClone);
+                });
+            })
+            .catch(error => {
+                console.error('Erreur :', error);
+                const container = document.getElementById('calendar-container');
+                container.textContent = "Impossible de charger les calendriers. Veuillez réessayer plus tard.";
+            });
+    </script>
+</body>
+</html>
