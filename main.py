@@ -305,7 +305,7 @@ def main() -> None:
 
     shutil.copy(link_file, 'public/' + link_file)
     shutil.copy(json_file, 'public/' + json_file)
-    # shutil.copy("index.html", 'public/index.html')
+    shutil.copy("index.html", 'public/index.html')
 
 
 if __name__ == '__main__':

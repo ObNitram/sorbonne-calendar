@@ -4,7 +4,7 @@ Un script Python non officiel qui génère des liens vers les calendriers des di
 
 ## 📅 Utilisation
 
-1. Accédez aux fichiers URL des matières supportées en cliquant [ --> ici <-- ](link.md) ou [ --> ici <-- ](https://obnitram.github.io) pour une interface web.
+1. Accédez aux fichiers URL des matières supportées en cliquant [ --> ici <-- ](https://obnitram.github.io/sorbonne-calendar/index.html) pour une interface web.
 2. Copiez l'URL du calendrier correspondant à votre matière.
 3. Ajoutez les calendriers à votre application de calendrier préférée (Google Calendar, Apple Calendar, etc.) en utilisant l'option d'ajout via URL.
 
