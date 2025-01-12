@@ -169,10 +169,18 @@ def main() -> None:
         } for name, path in paths.items()]
     })
 
-    json_data.append(tmp_data)
-
     paths = save_calendars(get_anglais_sar_calendars(filtered_calendars["ANGLAIS"]), "m1/sar/anglais")
     write_links_to_file(paths, link_file, host, "ANGLAIS")
+
+    tmp_data["ues"].append({
+        "name": "ANGLAIS (voir les groupes sur Moodle)",
+        "groups": [{
+            "group": f"{name}",
+            "url": f"{host}{path}"
+        } for name, path in paths.items()]
+    })
+
+    json_data.append(tmp_data)
 
     # M1 SESI
     write_string_to_file(f"## Calendrier des cours de M1 SESI\n\n", link_file)

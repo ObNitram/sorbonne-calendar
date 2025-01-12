@@ -16,5 +16,5 @@ def get_anglais_sar_calendars(raw_calendar: Calendar) -> Dict[str, Calendar]:
     ])
 
     return {
-        "group1": group1
+        "group": group1
     }
