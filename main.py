@@ -28,7 +28,7 @@ from core.lib_ar import get_ar_calendars
 from core.lib_srcs import get_srcs_calendars
 from core.lib_sftr import get_sftr_calendars
 from core.lib_sas import get_sas_calendars
-# from core.lib_anglais_sar import get_anglais_sar_calendars
+from core.lib_anglais_sar import get_anglais_sar_calendars
 
 # Replace 'username' and 'password' with your correct credentials
 username = 'student.master'
@@ -48,8 +48,6 @@ def get_filtered_calendars_from_url(url: str) -> Calendar:
     raw_calendar = load_calendar_from_url(url, auth)
     return filter_events_by_date_range(raw_calendar, start_date, end_date)
 
-
-# course_type_filters = [ "Cours", "cours", "TD1", "TD2", "TD3", "TD", "TME1", "TME2", "TME3", "TME", "TP", "anglais", "Anglais", "ANGLAIS"]
 
 # Main logic
 def main() -> None:
@@ -171,10 +169,18 @@ def main() -> None:
         } for name, path in paths.items()]
     })
 
-    json_data.append(tmp_data)
+    paths = save_calendars(get_anglais_sar_calendars(filtered_calendars["ANGLAIS"]), "m1/sar/anglais")
+    write_links_to_file(paths, link_file, host, "ANGLAIS")
 
-    # paths = save_calendars(get_anglais_sar_calendars(filtered_calendars["ANGLAIS"]), "m1/sar/anglais")
-    # write_links_to_file(paths, link_file, host, "ANGLAIS")
+    tmp_data["ues"].append({
+        "name": "ANGLAIS (voir les groupes sur Moodle)",
+        "groups": [{
+            "group": f"{name}",
+            "url": f"{host}{path}"
+        } for name, path in paths.items()]
+    })
+
+    json_data.append(tmp_data)
 
     # M1 SESI
     write_string_to_file(f"## Calendrier des cours de M1 SESI\n\n", link_file)
@@ -297,8 +303,6 @@ def main() -> None:
     })
 
     json_data.append(tmp_data)
-
-    print(json_data)
 
     with open(json_file, 'w') as f:
         json.dump(json_data, f)
