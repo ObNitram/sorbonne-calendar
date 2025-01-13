@@ -65,6 +65,11 @@ https://obnitram.github.io/sorbonne-calendar/m1/sar/sftr/m1-sar-sftr-group1.ics
 https://obnitram.github.io/sorbonne-calendar/m1/sar/sas/m1-sar-sas-group1.ics
 
 
+## ANGLAIS
+### group
+https://obnitram.github.io/sorbonne-calendar/m1/sar/anglais/m1-sar-anglais-group.ics
+
+
 ## Calendrier des cours de M1 SESI
 
 ## ARCHI
