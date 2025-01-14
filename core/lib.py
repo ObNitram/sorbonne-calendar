@@ -1,11 +1,16 @@
 import os
 import requests
-from datetime import datetime
+from datetime import datetime, timezone
 from ics import Calendar
-from typing import Dict, List
 
 from requests.auth import HTTPBasicAuth
+from core.config import publish_dir, username, password
 
+auth = HTTPBasicAuth(username, password)
+
+def get_filtered_calendars_from_url(url: str) -> Calendar:
+    raw_calendar = load_calendar_from_url(url, auth)
+    return filter_events_by_date_range(raw_calendar, *get_school_year_dates())
 
 def load_calendar_from_file(filename: str) -> Calendar:
     """Load the calendar from an ICS file."""
@@ -38,7 +43,7 @@ def display_events(calendar: Calendar) -> None:
         print("=" * 40)
 
 
-def filter_events_by_name(calendar: Calendar, filters: List[str]) -> Dict[str, Calendar]:
+def filter_events_by_name(calendar: Calendar, filters: list[str]) -> dict[str, Calendar]:
     """Filter the events in the calendar by name and return a 'default' calendar for unmatched events."""
     # Initialize the filtered calendars with a "default" calendar for unmatched events
     filtered_calendars: Dict[str, Calendar] = {filter: Calendar() for filter in filters}
@@ -63,11 +68,11 @@ def filter_events_by_name(calendar: Calendar, filters: List[str]) -> Dict[str, C
     return filtered_calendars
 
 
-def save_calendars(calendars: Dict[str, Calendar], path: str = "") -> dict[str, str]:
+def save_calendars(calendars: dict[str, Calendar], path: str = "") -> dict[str, str]:
     """Save the filtered calendars to separate ICS files, creating directories if needed."""
 
     # Create the directory if it doesn't exist
-    full_path = os.path.join("public", path)
+    full_path = os.path.join(publish_dir, path)
     os.makedirs(full_path, exist_ok=True)
 
     # paths
@@ -100,7 +105,7 @@ def filter_events_by_date_range(calendar: Calendar, start_date: datetime, end_da
     return filtered_calendar
 
 
-def merge_calendars(calendars: List[Calendar]) -> Calendar:
+def merge_calendars(calendars: list[Calendar]) -> Calendar:
     """Merge multiple calendars into a single calendar by combining all events."""
     merged_calendar = Calendar()
 
@@ -112,7 +117,7 @@ def merge_calendars(calendars: List[Calendar]) -> Calendar:
     return merged_calendar
 
 
-def write_links_to_file(paths: Dict[str,str], link_file: str, host: str, title: str) -> None:
+def write_links_to_file(paths: dict[str,str], link_file: str, host: str, title: str) -> None:
     """Write the links to the file."""
     with open(link_file, 'a') as f:
         f.write(f"## {title}\n")
@@ -126,3 +131,17 @@ def write_string_to_file(content: str, file: str) -> None:
     """Write the content to the file."""
     with open(file, 'a') as f:
         f.write(content)
+
+def get_school_year_dates():
+    """Détermine dynamiquement les dates de début et de fin de l'année scolaire actuelle."""
+    today = datetime.now(timezone.utc)
+    current_year = today.year
+
+    if today.month >= 9:  # Année scolaire commence en septembre de l'année actuelle
+        start_date = datetime(current_year, 9, 1, tzinfo=timezone.utc)
+        end_date = datetime(current_year + 1, 6, 30, tzinfo=timezone.utc)
+    else:  # Année scolaire a commencé en septembre de l'année précédente
+        start_date = datetime(current_year - 1, 9, 1, tzinfo=timezone.utc)
+        end_date = datetime(current_year, 6, 30, tzinfo=timezone.utc)
+
+    return start_date, end_date

@@ -3,3 +3,4 @@ tmp
 *venv
 public
 __pycache__
+config.ini
