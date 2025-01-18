@@ -16,7 +16,7 @@ class Master :
     name: str = ""
     ues: list[UE] = []
     def __init__(self, master: str, input_url: str, ues: list[dict]):
-        # ues is now a list of dictionaries with keys: 'name', 'year', 'semester'
+        # ues is now a list of dictionaries with keys: 'name', 'semester'
 
         calendar = get_filtered_calendars_from_url(input_url)
         filtered_calendars: dict[str, Calendar] = filter_events_by_name(calendar, [ue['ue'] for ue in ues])
