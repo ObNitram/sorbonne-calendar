@@ -191,7 +191,7 @@ def main() -> None:
     }
 
     calendar = get_filtered_calendars_from_url('https://cal.ufr-info-p6.jussieu.fr/caldav.php/SESI/M1_SESI')
-    filters = ["ARCHI", "VLSI"]
+    filters = ["ARCHI", "VLSI", "MULTI", "IOC"]
     filtered_calendars: Dict[str, Calendar] = filter_events_by_name(calendar, filters)
 
     paths = save_calendars(get_archi_calendars(filtered_calendars["ARCHI"]), "m1/sesi/archi")
@@ -218,6 +218,34 @@ def main() -> None:
 
     json_data.append(tmp_data)
 
+    #_M1 SESI 2nd semestre
+    write_string_to_file(f"## Calendrier des cours de M1 SESI 2nd semestre\n\n", link_file)
+
+    paths = save_calendars(get_multi_calendars(filtered_calendars["MULTI"]), "m1/sesi/multi")
+    write_links_to_file(paths, link_file, host, "MULTI")
+
+    tmp_data["ues"].append({
+        "name": "MULTI",
+        "groups": [{
+            "group": f"{name}",
+            "url": f"{host}{path}"
+        } for name, path in paths.items()]
+    })
+
+    paths = save_calendars(get_ioc_calendars(filtered_calendars["IOC"]), "m1/sesi/ioc")
+    write_links_to_file(paths, link_file, host, "IOC")
+
+    tmp_data["ues"].append({
+        "name": "IOC",
+        "groups": [{
+            "group": f"{name}",
+            "url": f"{host}{path}"
+        } for name, path in paths.items()]
+    })
+
+    json_data.append(tmp_data)
+
+    
     # M1 SFPN
     write_string_to_file(f"## Calendrier des cours de M1 SFPN\n\n", link_file)
 
