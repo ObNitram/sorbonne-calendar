@@ -88,6 +88,21 @@ https://obnitram.github.io/sorbonne-calendar/m1/sesi/archi/m1-sesi-archi-group3-
 https://obnitram.github.io/sorbonne-calendar/m1/sesi/vlsi/m1-sesi-vlsi-group1.ics
 
 
+## Calendrier des cours de M1 SESI 2nd semestre
+
+## MULTI
+### Français
+https://obnitram.github.io/sorbonne-calendar/m1/sesi/multi/m1-sesi-multi-Français.ics
+
+### Anglais
+https://obnitram.github.io/sorbonne-calendar/m1/sesi/multi/m1-sesi-multi-Anglais.ics
+
+
+## IOC
+### group1
+https://obnitram.github.io/sorbonne-calendar/m1/sesi/ioc/m1-sesi-ioc-group1.ics
+
+
 ## Calendrier des cours de M1 SFPN
 
 ## SC
