@@ -1,5 +1,4 @@
-#from ics import Calendar
-import icalendar
+from ics import Calendar
 from typing import Dict
 
 from core.lib import (
