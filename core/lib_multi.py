@@ -12,7 +12,7 @@ def get_multi_calendars(raw_calendar: Calendar) -> Dict[str, Calendar]:
     filtered_calendars = filter_events_by_name(raw_calendar, course_type_filters)
 
     francais = merge_calendars([
-        filtered_calendars["Cours"],
+        filtered_calendars["MULTI-Cours"],
         filtered_calendars["TME"],
         filtered_calendars["default"]
     ])
