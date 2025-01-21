@@ -1,12 +1,8 @@
-import configparser
 from requests.auth import HTTPBasicAuth
 
-config = configparser.ConfigParser()
-config.read('config.ini')
-
-username = config['credentials']['username']
-password = config['credentials']['password']
+username = 'student.master'
+password = 'guest'
 auth = HTTPBasicAuth(username, password)
 
-host = config['paths']['host']
-publish_dir = config['paths']['publish_dir']
+host = 'https://obnitram.github.io/sorbonne-calendar/'
+publish_dir = 'public'
