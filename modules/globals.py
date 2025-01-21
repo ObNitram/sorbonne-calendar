@@ -12,6 +12,8 @@ from modules.ar import get_ar_calendars
 from modules.srcs import get_srcs_calendars
 from modules.sftr import get_sftr_calendars
 from modules.sas import get_sas_calendars
+from modules.multi import get_multi_calendars
+from modules.ioc import get_ioc_calendars
 from modules.anglais_sar import get_anglais_sar_calendars
 
 MODULE_FUNCTIONS = {
