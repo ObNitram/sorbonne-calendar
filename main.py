@@ -22,7 +22,9 @@ def main() -> None:
         ]),
         Master("SESI", "https://cal.ufr-info-p6.jussieu.fr/caldav.php/SESI/M1_SESI", [
             {"ue": "ARCHI",  "semester": 1},
-            {"ue": "VLSI",  "semester": 1}
+            {"ue": "VLSI",  "semester": 1},
+            {"ue": "MULTI",  "semester": 2},
+            {"ue": "IOC",  "semester": 2}
         ]),
         Master("SFPN", "https://cal.ufr-info-p6.jussieu.fr/caldav.php/SFPN/M1_SFPN-AFTI", [
             {"ue": "SC",  "semester": 1}

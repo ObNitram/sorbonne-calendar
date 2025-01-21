@@ -30,4 +30,6 @@ MODULE_FUNCTIONS = {
     "STL.ALGAV": get_algav_calendars,
     "STL.DLP": get_dlp_calendars,
     "DAC.MLBDA": get_mlbda_calendars,
+    "SESI.MULTI": get_multi_calendars,
+    "SESI.IOC": get_ioc_calendars
 }
