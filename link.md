@@ -147,6 +147,13 @@ https://obnitram.github.io/sorbonne-calendar/m2/m2-sar/nmv/m2-m2-sar-nmv-group1.
 ### group1
 https://obnitram.github.io/sorbonne-calendar/m2/m2-sar/astre/m2-m2-sar-astre-group1.ics
 
+## OIP (M2, S1)
+### group1
+https://obnitram.github.io/sorbonne-calendar/m2/m2-sar/oip/m2-m2-sar-oip-group1.ics
+
+### group2
+https://obnitram.github.io/sorbonne-calendar/m2/m2-sar/oip/m2-m2-sar-oip-group2.ics
+
 ## Calendrier des cours de M2-SESI
 
 ## PACC (M2, S1)
