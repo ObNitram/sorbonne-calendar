@@ -47,7 +47,7 @@ def main() -> None:
             {"ue": "DATACLOUD",  "semester": 3},
             {"ue": "NMV",  "semester": 3},
             {"ue": "ASTRE",  "semester": 3},
-            
+            {"ue": "OIP",  "semester": 3},
         ]),
         Master("M2-SESI", "https://cal.ufr-info-p6.jussieu.fr/caldav.php/SESI/M2_SESI", [
             {"ue": "PACC",  "semester": 3},

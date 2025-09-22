@@ -24,6 +24,7 @@ from modules.ara import get_ara_calendars
 from modules.datacloud import get_datacloud_calendars
 from modules.nmv import get_nmv_calendars
 from modules.astre import get_astre_calendars
+from modules.oip_sar import get_oip_sar_calendars
 from modules.pacc import get_pacc_calendars
 from modules.smc import get_smc_calendars
 
@@ -53,6 +54,7 @@ MODULE_FUNCTIONS = {
     "M2-SAR.DATACLOUD": get_datacloud_calendars,
     "M2-SAR.NMV": get_nmv_calendars,
     "M2-SAR.ASTRE": get_astre_calendars,
+    "M2-SAR.OIP": get_oip_sar_calendars,
     "M2-SESI.PACC": get_pacc_calendars,
     "M2-SESI.SMC": get_smc_calendars,
 }
