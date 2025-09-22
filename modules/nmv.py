@@ -7,7 +7,7 @@ from core.lib import (
 )
 
 
-def get_nvm_calendars(raw_calendar: Calendar) -> Dict[str, Calendar]:
+def get_nmv_calendars(raw_calendar: Calendar) -> Dict[str, Calendar]:
     course_type_filters = ["Cours", "TD", "TME"]
     filtered_calendars = filter_events_by_name(raw_calendar, course_type_filters)
 

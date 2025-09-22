@@ -45,7 +45,7 @@ def main() -> None:
         Master("M2-SAR", "https://cal.ufr-info-p6.jussieu.fr/caldav.php/SAR/M2_SAR", [
             {"ue": "ARA",  "semester": 3},
             {"ue": "DATACLOUD",  "semester": 3},
-            {"ue": "NVM",  "semester": 3},
+            {"ue": "NMV",  "semester": 3},
             {"ue": "ASTRE",  "semester": 3},
             
         ]),
