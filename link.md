@@ -139,9 +139,9 @@ https://obnitram.github.io/sorbonne-calendar/m2/m2-sar/ara/m2-m2-sar-ara-group1.
 ### group1
 https://obnitram.github.io/sorbonne-calendar/m2/m2-sar/datacloud/m2-m2-sar-datacloud-group1.ics
 
-## NVM (M2, S1)
+## NMV (M2, S1)
 ### group1
-https://obnitram.github.io/sorbonne-calendar/m2/m2-sar/nvm/m2-m2-sar-nvm-group1.ics
+https://obnitram.github.io/sorbonne-calendar/m2/m2-sar/nmv/m2-m2-sar-nmv-group1.ics
 
 ## ASTRE (M2, S1)
 ### group1
