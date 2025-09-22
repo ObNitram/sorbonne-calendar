@@ -5,107 +5,465 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mes Calendriers</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --sorbonne-blue: #1e3a8a;
+            --sorbonne-light-blue: #3b82f6;
+            --sorbonne-accent: #06b6d4;
+            --sorbonne-gold: #f59e0b;
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
-            color: #333;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #e0f2fe 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
         }
 
         header {
-            background-color: #0078d7;
-            color: #fff;
-            padding: 1rem;
+            background: linear-gradient(135deg, var(--sorbonne-blue) 0%, var(--sorbonne-light-blue) 100%);
+            color: white;
+            padding: 2.5rem 1rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+        }
+
+        header h1 {
+            margin: 0 0 1rem 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-subtitle {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-subtitle p {
+            margin: 0 0 1rem 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .header-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .header-badge {
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-badge:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-badge.star-btn {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            border-color: rgba(245, 158, 11, 0.5);
+        }
+
+        .header-badge.star-btn:hover {
+            background: linear-gradient(135deg, #d97706 0%, #92400e 100%);
         }
 
         main {
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 2rem;
+            position: relative;
+            z-index: 1;
         }
 
         .accordion {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            background-color: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            margin-bottom: 1.5rem;
+            background-color: var(--bg-secondary);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .accordion:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
         .accordion-header {
-            background-color: #0078d7;
-            color: #fff;
-            padding: 1rem;
+            background: linear-gradient(135deg, var(--sorbonne-blue) 0%, var(--sorbonne-light-blue) 100%);
+            color: white;
+            padding: 1.25rem 1.5rem;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .accordion-header::after {
+            content: '▼';
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .accordion-header.active::after {
+            transform: rotate(180deg);
         }
 
         .accordion-header:hover {
-            background-color: #005bb5;
+            background: linear-gradient(135deg, var(--sorbonne-light-blue) 0%, var(--sorbonne-accent) 100%);
         }
 
         .accordion-content {
             display: none;
-            padding: 1rem;
-            border-top: 1px solid #ddd;
+            padding: 0;
+            border-top: 1px solid var(--border-color);
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .accordion-content.active {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .calendar-card {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(145deg, var(--bg-secondary) 0%, #f1f5f9 100%);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            margin: 1rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calendar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--sorbonne-accent) 0%, var(--sorbonne-gold) 100%);
+        }
+
+        .calendar-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--sorbonne-light-blue);
         }
 
         .calendar-card h2 {
-            margin-top: 0;
+            margin: 0 0 0.75rem 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--sorbonne-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .calendar-card h2::before {
+            content: '📅';
+            font-size: 1rem;
         }
 
         .calendar-card p {
-            margin: 0.5rem 0;
+            margin: 0.5rem 0 1rem 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-family: 'Courier New', monospace;
+            background: #f1f5f9;
+            padding: 0.5rem;
+            border-radius: var(--radius-sm);
+            border-left: 3px solid var(--sorbonne-accent);
+            word-break: break-all;
         }
 
         .calendar-card .buttons {
-            margin-top: 1rem;
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
         }
 
         .calendar-card button {
-            background-color: #0078d7;
-            color: #fff;
+            background: linear-gradient(135deg, var(--sorbonne-blue) 0%, var(--sorbonne-light-blue) 100%);
+            color: white;
             border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--radius-md);
             cursor: pointer;
-            margin-right: 0.5rem;
-            transition: background-color 0.3s;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .calendar-card .open-btn::before {
+            content: '🔗';
+        }
+
+        .calendar-card .copy-btn {
+            background: linear-gradient(135deg, var(--sorbonne-accent) 0%, #0891b2 100%);
+        }
+
+        .calendar-card .copy-btn::before {
+            content: '📋';
         }
 
         .calendar-card button:hover {
-            background-color: #005bb5;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .calendar-card .open-btn:hover {
+            background: linear-gradient(135deg, var(--sorbonne-light-blue) 0%, var(--sorbonne-accent) 100%);
+        }
+
+        .calendar-card .copy-btn:hover {
+            background: linear-gradient(135deg, #0891b2 0%, var(--sorbonne-gold) 100%);
         }
 
         footer {
             text-align: center;
-            padding: 1rem;
-            background-color: #333;
-            color: #fff;
-            margin-top: 2rem;
+            padding: 2rem 1rem;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: #f1f5f9;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .github-btn {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .github-btn:hover {
+            background: linear-gradient(135deg, #d97706 0%, #92400e 100%);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .issue-btn {
+            background: transparent;
+            color: #f1f5f9;
+            border-color: #64748b;
+        }
+
+        .issue-btn:hover {
+            background: linear-gradient(135deg, var(--sorbonne-accent) 0%, #0891b2 100%);
+            border-color: var(--sorbonne-accent);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .header-subtitle p {
+                font-size: 1rem;
+            }
+
+            .header-badges {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.75rem;
+            }
+
+            .header-badge {
+                width: auto;
+                min-width: 180px;
+                justify-content: center;
+            }
+            
+            main {
+                padding: 1rem;
+            }
+            
+            .accordion-header {
+                padding: 1rem;
+                font-size: 1rem;
+            }
+            
+            .calendar-card {
+                margin: 0.5rem;
+                padding: 1rem;
+            }
+            
+            .calendar-card .buttons {
+                flex-direction: column;
+            }
+            
+            .calendar-card button {
+                justify-content: center;
+            }
+
+            .footer-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        .loading::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-color);
+            border-top: 2px solid var(--sorbonne-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Success/Error states */
+        .success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .error {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
         }
     </style>
 </head>
 <body>
     <header>
         <h1>Calendriers des master de Sorbonne université</h1>
+        <div class="header-subtitle">
+            <p>📅 Accédez facilement aux calendriers de tous les masters</p>
+            <div class="header-badges">
+                <a href="https://github.com/ObNitram/sorbonne_calendar" target="_blank" class="header-badge star-btn">
+                    ⭐ Donner une étoile
+                </a>
+                <a href="https://github.com/ObNitram/sorbonne_calendar" target="_blank" class="header-badge">
+                    📦 Open Source
+                </a>
+            </div>
+        </div>
     </header>
 
     <main id="calendar-container">
         <!-- Les sections d'accordéon seront générées ici -->
+        <div class="loading">Chargement des calendriers...</div>
+        
         <template id="accordion-template">
             <div class="accordion">
-                <div class="accordion-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'block' ? 'none' : 'block';"></div>
+                <div class="accordion-header" onclick="toggleAccordion(this)"></div>
                 <div class="accordion-content"></div>
             </div>
         </template>
@@ -123,64 +481,197 @@
     </main>
 
     <footer>
+        <div style="margin-bottom: 1.5rem;">
+            <strong>🎓 Calendriers Sorbonne Université</strong>
+        </div>
+        
+        <div class="footer-actions" style="margin-bottom: 1.5rem;">
+            <a href="https://github.com/ObNitram/sorbonne_calendar/issues/new?template=nouvelle-matiere.md&title=Nouvelle%20mati%C3%A8re%3A%20[NOM]" target="_blank" class="footer-btn issue-btn">
+                📝 Demander une matière
+            </a>
+        </div>
+        
+        <div style="opacity: 0.8; font-size: 0.8rem; margin-bottom: 1rem;">
+            Accédez facilement aux calendriers de tous les masters • 
+            <span id="current-year"></span>
+        </div>
+        
+        <div style="opacity: 0.6; font-size: 0.75rem;">
+            <a href="https://github.com/ObNitram/sorbonne_calendar" target="_blank" style="color: inherit; text-decoration: none;">
+                📦 Open Source sur GitHub
+            </a>
+        </div>
+        
+        <script>
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        </script>
     </footer>
 
     <script>
-
-        if (!(navigator.clipboard && navigator.clipboard.writeText)) {
-            alert('Votre navigateur ne supporte pas la copie dans le presse-papiers.');
+        // Fonction pour basculer l'état de l'accordéon avec animation
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const isActive = content.classList.contains('active');
+            
+            if (isActive) {
+                content.classList.remove('active');
+                header.classList.remove('active');
+                content.style.display = 'none';
+            } else {
+                content.classList.add('active');
+                header.classList.add('active');
+                content.style.display = 'block';
+            }
         }
 
-        fetch('calendars.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erreur lors du chargement du fichier JSON');
+        // Fonction pour copier dans le presse-papiers avec feedback
+        async function copyToClipboard(text, button) {
+            try {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    await navigator.clipboard.writeText(text);
+                    showCopyFeedback(button, 'success');
+                } else {
+                    // Fallback pour les navigateurs plus anciens
+                    const textArea = document.createElement('textarea');
+                    textArea.value = text;
+                    textArea.style.position = 'fixed';
+                    textArea.style.left = '-999999px';
+                    textArea.style.top = '-999999px';
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
+                    document.execCommand('copy');
+                    textArea.remove();
+                    showCopyFeedback(button, 'success');
                 }
-                return response.json();
-            })
-            .then(data => {
-                const container = document.getElementById('calendar-container');
-                const accordionTemplate = document.getElementById('accordion-template');
-                const calendarTemplate = document.getElementById('calendar-template');
+            } catch (err) {
+                console.error('Erreur lors de la copie:', err);
+                showCopyFeedback(button, 'error');
+            }
+        }
 
-                data.forEach(master => {
-                    const masterClone = accordionTemplate.content.cloneNode(true);
-                    const masterHeader = masterClone.querySelector('.accordion-header');
-                    const masterContent = masterClone.querySelector('.accordion-content');
+        // Fonction pour afficher un feedback visuel après la copie
+        function showCopyFeedback(button, type) {
+            const originalText = button.textContent;
+            const originalClass = button.className;
+            
+            if (type === 'success') {
+                button.textContent = '✓ Copié !';
+                button.classList.add('success');
+            } else {
+                button.textContent = '✗ Erreur';
+                button.classList.add('error');
+            }
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.className = originalClass;
+            }, 2000);
+        }
 
-                    masterHeader.textContent = `Master ${master.master}`;
-                    master.ues.forEach(ue => {
-                        const ueClone = accordionTemplate.content.cloneNode(true);
-                        const ueHeader = ueClone.querySelector('.accordion-header');
-                        const ueContent = ueClone.querySelector('.accordion-content');
+        // Fonction pour ouvrir un lien avec animation
+        function openCalendar(url, button) {
+            button.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                button.style.transform = '';
+                window.open(url, '_blank');
+            }, 150);
+        }
 
-                        ueHeader.textContent = ue.name;
+        // Chargement des données avec gestion des erreurs améliorée
+        function loadCalendars() {
+            const container = document.getElementById('calendar-container');
+            
+            fetch('calendars.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Erreur HTTP: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Supprimer l'indicateur de chargement
+                    const loading = container.querySelector('.loading');
+                    if (loading) {
+                        loading.remove();
+                    }
+
+                    const accordionTemplate = document.getElementById('accordion-template');
+                    const calendarTemplate = document.getElementById('calendar-template');
+
+                    data.forEach((master, masterIndex) => {
+                        const masterClone = accordionTemplate.content.cloneNode(true);
+                        const masterHeader = masterClone.querySelector('.accordion-header');
+                        const masterContent = masterClone.querySelector('.accordion-content');
+
+                        masterHeader.textContent = `🎓 Master ${master.master}`;
                         
-                        ue.groups.forEach(group => {
-                            const groupClone = calendarTemplate.content.cloneNode(true);
-                            groupClone.querySelector('h2').textContent = group.group;
-                            groupClone.querySelector('p').textContent = `URL: ${group.url}`;
+                        master.ues.forEach((ue, ueIndex) => {
+                            const ueClone = accordionTemplate.content.cloneNode(true);
+                            const ueHeader = ueClone.querySelector('.accordion-header');
+                            const ueContent = ueClone.querySelector('.accordion-content');
 
-                            const openButton = groupClone.querySelector('.open-btn');
-                            openButton.onclick = () => window.open(group.url, '_blank');
+                            ueHeader.textContent = `📚 ${ue.name}`;
+                            
+                            ue.groups.forEach((group, groupIndex) => {
+                                const groupClone = calendarTemplate.content.cloneNode(true);
+                                const groupCard = groupClone.querySelector('.calendar-card');
+                                
+                                groupClone.querySelector('h2').textContent = group.group;
+                                groupClone.querySelector('p').textContent = group.url;
 
-                            const copyButton = groupClone.querySelector('.copy-btn');
-                            copyButton.onclick = () => navigator.clipboard.writeText(group.url);
+                                const openButton = groupClone.querySelector('.open-btn');
+                                openButton.onclick = () => openCalendar(group.url, openButton);
 
-                            ueContent.appendChild(groupClone);
+                                const copyButton = groupClone.querySelector('.copy-btn');
+                                copyButton.onclick = () => copyToClipboard(group.url, copyButton);
+
+                                // Animation d'apparition échelonnée
+                                groupCard.style.opacity = '0';
+                                groupCard.style.transform = 'translateY(20px)';
+                                
+                                setTimeout(() => {
+                                    groupCard.style.transition = 'all 0.5s ease';
+                                    groupCard.style.opacity = '1';
+                                    groupCard.style.transform = 'translateY(0)';
+                                }, (masterIndex * 100) + (ueIndex * 50) + (groupIndex * 100));
+
+                                ueContent.appendChild(groupClone);
+                            });
+
+                            masterContent.appendChild(ueClone);
                         });
 
-                        masterContent.appendChild(ueClone);
+                        container.appendChild(masterClone);
                     });
-
-                    container.appendChild(masterClone);
+                })
+                .catch(error => {
+                    console.error('Erreur lors du chargement:', error);
+                    
+                    const loading = container.querySelector('.loading');
+                    if (loading) {
+                        loading.innerHTML = `
+                            <div style="text-align: center; color: #ef4444;">
+                                <h3>⚠️ Erreur de chargement</h3>
+                                <p>Impossible de charger les calendriers.</p>
+                                <button onclick="location.reload()" style="
+                                    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+                                    color: white;
+                                    border: none;
+                                    padding: 0.75rem 1.5rem;
+                                    border-radius: 8px;
+                                    cursor: pointer;
+                                    margin-top: 1rem;
+                                    font-weight: 500;
+                                ">🔄 Réessayer</button>
+                            </div>
+                        `;
+                    }
                 });
-            })
-            .catch(error => {
-                console.error('Erreur :', error);
-                const container = document.getElementById('calendar-container');
-                container.textContent = "Impossible de charger les calendriers. Veuillez réessayer plus tard.";
-            });
+        }
+
+        // Démarrer le chargement une fois que le DOM est prêt
+        document.addEventListener('DOMContentLoaded', loadCalendars);
     </script>
 </body>
 </html>
