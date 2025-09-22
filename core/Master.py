@@ -34,4 +34,4 @@ class Master :
         }
 
     def to_markdown(self):
-        return f"## Calendrier des cours de M1 {self.name}\n\n" + ''.join(ue.to_markdown() for ue in self.ues)
+        return f"## Calendrier des cours de {self.name}\n\n" + ''.join(ue.to_markdown() for ue in self.ues)
