@@ -1,3 +1,12 @@
+# _Deprecated: As of 2026, this project is no longer maintained because I have completed my studies at Sorbonne Université. The code remains available for reference and use, but it may not reflect the latest changes in the university’s calendar system._
+
+> If you would like to continue this project, feel free to contact me on LinkedIn so I can add a link to your new repository here.
+
+
+
+
+
+
 # Sorbonne Calendar
 
 Un script Python non officiel qui génère des liens vers les calendriers des différentes matières de Sorbonne Université.
