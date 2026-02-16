@@ -1,6 +1,7 @@
 # _Deprecated: As of 2026, this project is no longer maintained because I have completed my studies at Sorbonne Université. The code remains available for reference and use, but it may not reflect the latest changes in the university’s calendar system._
 
-> If you would like to continue this project, feel free to contact me on LinkedIn so I can add a link to your new repository here.
+> If you would like to continue this project, feel free to contact me on LinkedIn 
+[<img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" width="20" height="20" />](https://link.obnitram.cloud/linkedin-g) so I can add a link to your new repository here.
 
 
 
